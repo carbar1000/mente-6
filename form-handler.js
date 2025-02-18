@@ -14,8 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function sendToSupabase(formData) {
+        if (!window.supabase) {
+            throw new Error('Supabase não inicializado');
+        }
+
         try {
-            const { data, error } = await supabase
+            const { data, error } = await window.supabase
                 .from('respostas')
                 .insert([formData]);
 
@@ -51,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.success) {
                 showMessage('Dados enviados com sucesso!', 'success');
                 setTimeout(() => {
-                    window.location.href = 'obrigado.html';  // Mudança aqui
+                    window.location.href = '/obrigado';  // Atualizado para rota do Vercel
                 }, 1500);
             } else {
                 showMessage(result.error);
