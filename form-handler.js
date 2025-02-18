@@ -4,9 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('myForm');
     
     form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+        event.preventDefault(); // Impede o envio tradicional do formulário
         
-        // Only include form fields that need to be submitted
         const formData = {
             nome: document.querySelector('#nome').value,
             email: document.querySelector('#email').value,
@@ -16,20 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const { data, error } = await supabase
+            const { error } = await supabase
                 .from('respostas')
                 .insert([formData]);
 
             if (error) throw error;
 
-            // Show success message
-            const flashMessage = document.getElementById('flashMessage');
-            flashMessage.textContent = 'Dados enviados com sucesso!';
-            flashMessage.className = 'flash-message success';
-            flashMessage.style.display = 'block';
-
-            // Redirect to thank you page
-            window.location.href = '/obrigado';
+            // Redirecionamento imediato após sucesso
+            window.location.replace('/obrigado.html');
 
         } catch (error) {
             console.error('Erro:', error);
