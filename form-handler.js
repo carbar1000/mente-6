@@ -1,4 +1,4 @@
-// form-handler.js 16:57
+// form-handler.js 17:05
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('myForm');
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.success) {
                 showMessage('Dados enviados com sucesso!', 'success');
                 setTimeout(() => {
-                    window.location.href = '/obrigado';
+                    window.location.href = 'obrigado.html';  // Mudança aqui
                 }, 1500);
             } else {
                 showMessage(result.error);

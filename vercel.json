@@ -10,11 +10,8 @@
     { "src": "form-handler.js", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/", "dest": "index.html" },
-    { "src": "/obrigado", "dest": "obrigado.html" }
-  ],
-  "env": {
-    "SUPABASE_URL": "@supabase_url",
-    "SUPABASE_ANON_KEY": "@supabase_anon_key"
-  }
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/obrigado", "dest": "/obrigado.html" },
+    { "src": "/obrigado.html", "dest": "/obrigado.html" }
+  ]
 }
