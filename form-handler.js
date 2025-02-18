@@ -13,24 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000);
     }
 
-    function validateForm(formData) {
-        const errors = [];
-        
-        if (!formData.nome || formData.nome.length < 5) {
-            errors.push('Nome deve ter pelo menos 5 caracteres');
-        }
-        
-        if (!formData.email || !isValidEmail(formData.email)) {
-            errors.push('Email inválido');
-        }
-        
-        if (!formData.cor) errors.push('Selecione uma cor');
-        if (!formData.animal) errors.push('Selecione um animal');
-        if (!formData.hobby) errors.push('Selecione um hobby');
-        
-        return errors;
-    }
-
     async function sendToSupabase(formData) {
         try {
             const { data, error } = await supabase
@@ -58,12 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
             animal: document.querySelector('input[name="animal"]:checked')?.value,
             hobby: document.querySelector('input[name="hobby"]:checked')?.value
         };
-
-        const errors = validateForm(formData);
-        if (errors.length > 0) {
-            showMessage(errors.join('\n'));
-            return;
-        }
 
         const submitButton = form.querySelector('button[type="submit"]');
         submitButton.disabled = true;
