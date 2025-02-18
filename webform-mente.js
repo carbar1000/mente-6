@@ -63,6 +63,7 @@ function isValidEmail(email) {
     return regex.test(email);
 }
 // Manter apenas funções de UI e navegação
+// UI Navigation Functions
 function startSurvey() {
     const intro = document.getElementById('intro');
     const form = document.getElementById('myForm');
@@ -85,6 +86,6 @@ function autoNext() {
     }
 }
 
-// Expor funções globalmente
+// Make functions available globally
 window.startSurvey = startSurvey;
 window.autoNext = autoNext;
