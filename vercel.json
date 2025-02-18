@@ -4,15 +4,17 @@
     { "src": "index.html", "use": "@vercel/static" },
     { "src": "obrigado.html", "use": "@vercel/static" },
     { "src": "webform-mente.css", "use": "@vercel/static" },
-    { "src": "src/webform-mente.js", "use": "@vercel/static" },
-    { "src": "webform-mente-navigate.js", "use": "@vercel/static" }
+    { "src": "webform-mente.js", "use": "@vercel/static" },
+    { "src": "webform-mente-navigate.js", "use": "@vercel/static" },
+    { "src": "supabase-config.js", "use": "@vercel/static" },
+    { "src": "form-handler.js", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/", "dest": "index.html" },
     { "src": "/obrigado", "dest": "obrigado.html" }
   ],
   "env": {
-    "SUPABASE_URL": "",
-    "SUPABASE_KEY": ""
+    "SUPABASE_URL": "@supabase_url",
+    "SUPABASE_ANON_KEY": "@supabase_anon_key"
   }
 }
