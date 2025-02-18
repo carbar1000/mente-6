@@ -6,31 +6,33 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         
+        // Only include form fields that need to be submitted
         const formData = {
-            cor: form.querySelector('input[name="cor"]:checked')?.value,
-            animal: form.querySelector('input[name="animal"]:checked')?.value,
-            hobby: form.querySelector('input[name="hobby"]:checked')?.value,
-            nome: form.querySelector('#nome').value,
-            email: form.querySelector('#email').value,
-            created_at: new Date().toISOString()
+            nome: document.querySelector('#nome').value,
+            email: document.querySelector('#email').value,
+            cor: document.querySelector('input[name="cor"]:checked')?.value,
+            animal: document.querySelector('input[name="animal"]:checked')?.value,
+            hobby: document.querySelector('input[name="hobby"]:checked')?.value
         };
 
         try {
-            const { error } = await supabase
+            const { data, error } = await supabase
                 .from('respostas')
                 .insert([formData]);
 
             if (error) throw error;
 
+            // Show success message
             const flashMessage = document.getElementById('flashMessage');
             flashMessage.textContent = 'Dados enviados com sucesso!';
             flashMessage.className = 'flash-message success';
             flashMessage.style.display = 'block';
 
-            form.reset();
+            // Redirect to thank you page
+            window.location.href = '/obrigado';
 
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Erro:', error);
             const flashMessage = document.getElementById('flashMessage');
             flashMessage.textContent = 'Erro ao enviar dados. Tente novamente.';
             flashMessage.className = 'flash-message error';
