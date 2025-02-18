@@ -1,4 +1,6 @@
-const supabaseUrl = window.SUPABASE_URL;
-const supabaseKey = window.SUPABASE_ANON_KEY;
+const supabase = supabaseClient.createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_ANON_KEY
+);
 
-window.supabase = supabaseClient.createClient(supabaseUrl, supabaseKey);
+window.supabase = supabase;
