@@ -14,19 +14,19 @@ document.getElementById('myForm').addEventListener('submit', async (event) => {
         return;
     }
 
-    // Enviar dados para o Supabase
-    console.log('Dados do formulário:', { nome, email, cor, animal, hobby });
-    await sendToSupabase(nome, email, cor, animal, hobby);
-});
+    // Validar email
+    if (!isValidEmail(email)) {
+        alert('Por favor, insira um email válido.');
+        return;
+    }
 
-async function sendToSupabase(nome, email, cor, animal, hobby) {
-    console.log('Enviando dados para o Supabase...');
+    // Exibir mensagem de carregamento
+    const submitButton = document.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Enviando...';
+
     try {
-        const { data, error } = await supabase
-            .from('respostas')
-            .insert([
-                { nome: nome, email: email, cor: cor, animal: animal, hobby: hobby },
-            ]);
+        const { data, error } = await sendToSupabase(nome, email, cor, animal, hobby);
 
         if (error) {
             console.error('Erro ao enviar dados para o Supabase:', error);
@@ -34,10 +34,57 @@ async function sendToSupabase(nome, email, cor, animal, hobby) {
         } else {
             console.log('Dados enviados com sucesso para o Supabase:', data);
             alert('Dados enviados com sucesso!');
+            document.getElementById('myForm').reset(); // Limpar o formulário
             window.location.href = 'obrigado.html'; // Redirecionar para a página de agradecimento
         }
+    } finally {
+        // Restaurar botão de envio
+        submitButton.disabled = false;
+        submitButton.textContent = 'Enviar';
+    }
+});
+
+async function sendToSupabase(nome, email, cor, animal, hobby) {
+    try {
+        const { data, error } = await supabase
+            .from('respostas')
+            .insert([{ nome, email, cor, animal, hobby }]);
+
+        return { data, error };
     } catch (error) {
-        console.error('Erro ao enviar dados para o Supabase:', error);
-        alert('Erro ao enviar dados.');
+        console.error('Erro na função sendToSupabase:', error);
+        return { data: null, error: error };
     }
 }
+
+function isValidEmail(email) {
+    // Regex para validar email (simples)
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+// Manter apenas funções de UI e navegação
+function startSurvey() {
+    const intro = document.getElementById('intro');
+    const form = document.getElementById('myForm');
+    
+    if (intro && form) {
+        intro.classList.add('hidden');
+        form.classList.remove('hidden');
+    }
+}
+
+function autoNext() {
+    const currentContainer = document.querySelector('.form-container.active');
+    if (currentContainer) {
+        const nextButton = currentContainer.querySelector('button[onclick="navigate(1)"]');
+        if (nextButton) {
+            setTimeout(() => {
+                nextButton.click();
+            }, 500);
+        }
+    }
+}
+
+// Expor funções globalmente
+window.startSurvey = startSurvey;
+window.autoNext = autoNext;
