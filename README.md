@@ -9,7 +9,19 @@ Este projeto implementa um formulário de múltiplas etapas que guia os usuário
 - HTML5
 - CSS3
 - JavaScript Vanilla
-- Supabase (Banco de Dados)
+- Supabase (Banco de Dados) com as credenciais no ambiente de variaveis no vercel
 - Vercel (Hospedagem)
 
 ## Estrutura do Projeto
+form-mente-web/
+├── api/
+│   └── submit.js
+├── index.html
+├── obrigado.html
+├── webform-mente.css
+├── webform-mente.js
+├── webform-mente-navigate.js
+├── form-handler.js
+├── supabase-config.js
+├── package.json
+└── vercel.json

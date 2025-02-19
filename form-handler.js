@@ -34,27 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
     }
-    async function sendToSupabase(formData) {
-        try {
-            const response = await fetch('/api/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            });
-            
-            const result = await response.json();
-            if (!response.ok) throw new Error(result.error);
-            return { success: true, data: result };
-        } catch (error) {
-            console.error('Erro:', error);
-            return { 
-                success: false, 
-                error: error.message || 'Erro ao enviar dados'
-            };
-        }
-    }
+
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
