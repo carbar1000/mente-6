@@ -1,15 +1,8 @@
-//
-const { createClient } = supabase;
+// Configuração do Supabase - Apenas para inicialização básica
+// Todas as operações de banco de dados devem ser feitas via API (/api/submit)
 
-// Initialize Supabase client with environment variables
-window.supabase = createClient(
-    process.env.SUPABASE_URL || '',
-    process.env.SUPABASE_ANON_KEY || ''
-);
-
-// This file will be minimal since we're using API endpoints
 const initSupabase = () => {
-    console.log('Using secure API endpoint for Supabase operations');
+    console.log('Supabase configurado - Operações via API');
 };
 
 window.initSupabase = initSupabase;
